@@ -39,6 +39,22 @@ passport.use(new LocalStrategy({
 ));
 
 //passport jwt
+passport.use(new JWTStrategy({
+  jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
+  secretOrKey: 'your_jwt_secret'
+},
+function (jwtPayload, done) {
+
+  return User.findById(jwtPayload._id)
+    .then(user => {
+      return done(null, user);
+    })
+    .catch(err => {
+      return done(err);
+    });
+}
+));
+
 
 passport.serializeUser(function (user, done) {
   done(null, user.id);

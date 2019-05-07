@@ -31,6 +31,8 @@ server.use(passport.session())
 
 //routes
 server.use('/api/auth', require('./routes/auth.routes'))
+server.use('/api/games', passport.authenticate('jwt', {session: false}), require('./routes/games.routes'))
+
 
 
 
