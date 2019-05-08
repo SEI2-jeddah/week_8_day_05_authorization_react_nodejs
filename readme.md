@@ -123,7 +123,7 @@ $ npm install
 Take 10 min to review the starter code. Look for:
 
 - models
-- controllers
+- routes
 - CRUD functionality?
 
 # Break
@@ -158,7 +158,7 @@ In `passport.js`...
 ...
 passport.use(new JWTStrategy({
     jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
-    secretOrKey: 'your_jwt_secret'
+    secretOrKey: process.env.JWTSecret
   },
   function (jwtPayload, cb) {
 
@@ -192,6 +192,8 @@ In `server.js`...
 //Auth Routes
 server.use('/api/auth', require('./routes/auth.routes'))
 
+//The routes beneath will be authenticated by the passport JWT
+ middleware
 //user routes
 server.use('/api/users', passport.authenticate('jwt', {session: false}), require('./routes/users.routes'))
 
@@ -204,7 +206,8 @@ In `auth.routes.js`, we will start out like we would with a typical controller..
 ```js
 const express = require('express')
 const router = express.Router()
-
+//all codes are between here 
+//check the auth.routes.js file
 
 module.exports = router
 ```
