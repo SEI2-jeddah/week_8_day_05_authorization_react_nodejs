@@ -7,7 +7,10 @@ import {Container, Row, Button, Col, Alert} from 'reactstrap';
 import ShowGame from './components/ShowGame';
 import AddGame from './components/AddGame';
 
-
+/*------
+  Since JWT requires token to be passed in header
+  Save an object for header so I dont have to repeat this code
+----*/
 let header = {
   headers :{
     "Content-Type" : "application/json",
@@ -26,6 +29,7 @@ class App extends Component {
   }
 
   changeHandler = (e) => {
+    //Log every key value and save to state from form
     let data = {...this.state}
     data[e.target.name] = e.target.value
 
@@ -33,6 +37,8 @@ class App extends Component {
   }
 
   getGames = () =>{
+    //get data from JWT locked route
+    // Passed header variable with token in headers
     axios.get('/api/games', header)
     .then(response => {
       console.log(response.data)
@@ -88,6 +94,7 @@ class App extends Component {
   logout = () =>{
     logout()
     let data = {...this.state}
+    //reset everything on logout
     data.isAuthenticated = false
     data.user = ""
     data.email = ""
@@ -113,11 +120,11 @@ class App extends Component {
 
   
   render(){
-    
+    //if not logged in show login page
     const showLogin = (!this.state.isAuthenticated) ? <Login change={this.changeHandler} login={this.loginHandler} /> : null
-
+      // show logout button
     const Logout = (this.state.isAuthenticated) ? <Button onClick={this.logout}>Logout</Button> : null
-
+     //show games when logged in
     const GameView = (this.state.isAuthenticated) ? <Row>
                                                       <Col md={6}>
                                                         <ShowGame games={this.state.games} />
