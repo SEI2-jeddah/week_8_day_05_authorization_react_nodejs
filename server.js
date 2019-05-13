@@ -34,8 +34,6 @@ server.use('/api/auth', require('./routes/auth.routes'))
 server.use('/api/games', passport.authenticate('jwt', {session: false}), require('./routes/games.routes'))
 
 
-
-
 //cannot find route
 server.use('*', (request, response) => {
  response.status(404).json({message : "Data not found!"})

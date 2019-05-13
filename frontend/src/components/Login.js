@@ -2,6 +2,7 @@ import React from 'react'
 import { Input, Col, FormGroup, Label, Button} from 'reactstrap'
 
 const Login = (props) => {
+  console.log(props)
   return (
     <>
     <Col sm={3} md={4} className="mx-auto">

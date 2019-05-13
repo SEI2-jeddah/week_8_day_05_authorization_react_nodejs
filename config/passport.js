@@ -50,7 +50,8 @@ function (jwtPayload, done) {
       return done(null, user);
     })
     .catch(err => {
-      return done(err);
+      console.log(err)
+      return done(err,{ message : "not working"});
     });
 }
 ));

@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import axios from 'axios'
 import { getToken, setToken, logout} from './services/auth'
 import Login from './components/Login';
+import { BrowserRouter as Router, Route, Redirect, Switch } from "react-router-dom";
+
 
 import {Container, Row, Button, Col, Alert} from 'reactstrap';
 import ShowGame from './components/ShowGame';
@@ -114,7 +116,7 @@ class App extends Component {
   
   render(){
     
-    const showLogin = (!this.state.isAuthenticated) ? <Login change={this.changeHandler} login={this.loginHandler} /> : null
+    // const showLogin = (!this.state.isAuthenticated) ? <Login change={this.changeHandler} login={this.loginHandler} /> : null
 
     const Logout = (this.state.isAuthenticated) ? <Button onClick={this.logout}>Logout</Button> : null
 
@@ -133,11 +135,18 @@ class App extends Component {
     return (
       <Container>
         <Alert color="danger" isOpen={this.state.hasError} toggle={this.onDismiss} fade={false}>{this.state.errorMsg}</Alert>
-        
+
+        <a href="/home">Home</a>
+        <a href="/">Login</a>
+
+        <Router>
+          <Route path="/" exact render={(props => (!this.state.isAuthenticated) ? <Login change={this.changeHandler} login={this.loginHandler} {...props} /> : <Redirect to="/home"/> )} />
+          <Route path="/home/" render={(props) => GameView} />
+        </Router>
         Username: {this.state.user.username}
         {Logout}
       
-        {showLogin}
+        {/* {showLogin} */}
         {GameView}
       </Container>
     );
