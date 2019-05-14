@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import axios from 'axios'
 import { getToken, setToken, logout} from './services/auth'
+import jwt_decode from 'jwt-decode'
 import Login from './components/Login';
 import { BrowserRouter as Router, Route, Redirect, Switch } from "react-router-dom";
 
@@ -111,6 +112,27 @@ class App extends Component {
     return this.state.games.map(game => 
       <li key={game._id} id={game._id}>{game.name}</li>
       )
+  }
+
+
+  componentDidMount(){
+    /*
+      To stay logged in every time the App.js is rendered
+      Check if there is a token and if there is decode it and
+      set the data to state.
+      */
+    if(getToken()){
+      //remember the token consists of 3 parts
+      //1. HEADER:ALGORITHM & TOKEN TYPE
+      //2. PAYLOAD:DATA
+      //3. SIGNATURE
+      let decoded = jwt_decode(getToken()) //decode token
+      
+      let data = {...this.state}
+      data.user = decoded
+      data.isAuthenticated = true
+      this.setState(data)
+    }
   }
 
   
