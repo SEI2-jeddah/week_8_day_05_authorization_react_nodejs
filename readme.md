@@ -484,6 +484,7 @@ Your app now has functionality to sign up, log out, and log in, using passport a
 > Implement Add Games
 ### Additional Resources on using JWTs in MERN apps
 
+- [MERN : MongoDB , Express, React, Node, Full crud](https://medium.com/@beaucarnes/learn-the-mern-stack-by-building-an-exercise-tracker-mern-tutorial-59c13c1237a1)
 - https://medium.com/@rajaraodv/securing-react-redux-apps-with-jwt-tokens-fcfe81356ea0
 - https://hptechblogs.com/using-json-web-token-react/
 - https://blog.jscrambler.com/implementing-jwt-using-passport/
