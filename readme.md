@@ -113,7 +113,7 @@ When the user wants to access a route that requires authorization, the client wi
 Start out by cloning the repo:
 
 ```sh
-$ git clone https://github.com/ship-of-the-desert/week_11_day_03_authorization_react_nodejs.git
+$ git clone https://github.com/SEI2-jeddah/week_8_day_05_authorization_react_nodejs.git
 
 $ npm install
 $ cd frontend 
